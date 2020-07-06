@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import WelcomeScreen from "./welcome-screen";
 
@@ -7,21 +7,23 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
+const errorsCountTest = 3;
+
 describe(`WelcomeScreen`, () => {
   it(`Should welcome button be pressed`, () => {
     const onWelcomeButtonClick = jest.fn();
 
-    const welcomeScreen = shallow(
+    const welcomeScreen = mount(
         <WelcomeScreen
-          errorsCount={3}
+          errorsCount={errorsCountTest}
           onWelcomeButtonClick={onWelcomeButtonClick}
         />
     );
 
     const welcomeButton = welcomeScreen.find(`button.welcome__button`);
 
-    welcomeButton.props().onClick();
+    welcomeButton.simulate(`click`, {preventDefault() {}});
 
-    expect(onWelcomeButtonClick.mock.calls.length).toBe(1);
+    expect(onWelcomeButtonClick).toHaveBeenCalledTimes(1);
   });
 });
