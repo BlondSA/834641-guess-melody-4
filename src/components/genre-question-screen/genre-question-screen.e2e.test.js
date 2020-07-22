@@ -23,7 +23,7 @@ describe(`GenreQuestionScreen e2e test`, () => {
   it(`When user answers genre question form is not sent`, () => {
     const {question} = mock;
     const onAnswer = jest.fn();
-    const genreQuestion = shallow(<GenreQuestionScreen onAnswer={onAnswer} question={question}/>);
+    const genreQuestion = shallow(<GenreQuestionScreen onAnswer={onAnswer} question={question} renderPlayer={() => {}}/>);
 
     const form = genreQuestion.find(`form`);
     const formSendPrevention = jest.fn();
@@ -40,7 +40,7 @@ describe(`GenreQuestionScreen e2e test`, () => {
     const onAnswer = jest.fn((...args) => [...args]);
     const userAnswer = [false, true, false, false];
 
-    const genreQuestion = shallow(<GenreQuestionScreen onAnswer={onAnswer} question={question}/>);
+    const genreQuestion = shallow(<GenreQuestionScreen onAnswer={onAnswer} question={question} renderPlayer={() => {}}/>);
 
     const form = genreQuestion.find(`form`);
     const inputTwo = genreQuestion.find(`input`).at(1);

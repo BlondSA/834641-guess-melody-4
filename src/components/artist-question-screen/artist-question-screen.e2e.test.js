@@ -10,7 +10,7 @@ const mock = {
     type: `artist`,
     song: {
       artist: ``,
-      src: ``
+      src: ``,
     },
     answers: [
       {
@@ -26,14 +26,12 @@ const mock = {
         picture: `pic-three`,
       },
     ],
-  }
+  },
 };
-
 
 const mockEvent = {
-  preventDefault() {}
+  preventDefault() {},
 };
-
 
 describe(`ArtistQuestionScreen e2e test`, () => {
   it(`Click on user answer should pass to the callback data-object from which this answer was created`, () => {
@@ -48,7 +46,9 @@ describe(`ArtistQuestionScreen e2e test`, () => {
         <ArtistQuestionScreen
           onAnswer={onAnswer}
           question={question}
-        />);
+          renderPlayer={() => {}}
+        />
+    );
 
     const answerInputs = screen.find(`input`);
     const answerOne = answerInputs.at(0);
