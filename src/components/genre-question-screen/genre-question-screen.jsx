@@ -34,7 +34,7 @@ class GenreQuestionScreen extends PureComponent {
             <div key={`${i}-${answer.src}`} className="track">
               <AudioPlayer
                 isPlaying={i === 0}
-                src={answers.src}
+                src={answer.src}
               />
               <div className="game__answer">
                 <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`}
