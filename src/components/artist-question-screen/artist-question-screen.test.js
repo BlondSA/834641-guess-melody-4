@@ -21,19 +21,18 @@ const question = {
   }],
 };
 
-describe(`ArtistQuestionScreen test component`, () => {
-  it(`ArtistQuestionScreen is rendered correctly`, () => {
-    const tree = renderer.create(
-        <ArtistQuestionScreen
-          question={question}
-          onAnswer={() => {}}
-          renderPlayer={() => {}}
-        />, {
-          createNodeMock: () => {
-            return {};
-          }
+it(`ArtistQuestionScreen is rendered correctly`, () => {
+  const tree = renderer.create(
+      <ArtistQuestionScreen
+        question={question}
+        onAnswer={() => {}}
+        renderPlayer={() => {}}
+      />, {
+        createNodeMock: () => {
+          return {};
         }
-    ).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+      }
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });

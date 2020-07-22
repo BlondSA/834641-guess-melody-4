@@ -2,12 +2,11 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
-import GameScreen from "../game-screen/game-screen.jsx";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
+import GameScreen from "../game-screen/game-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
 import {GameType} from "../../const.js";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player.js";
-
 
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
 const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
@@ -43,7 +42,9 @@ class App extends PureComponent {
       switch (question.type) {
         case GameType.ARTIST:
           return (
-            <GameScreen>
+            <GameScreen
+              type={question.type}
+            >
               <ArtistQuestionScreenWrapped
                 question={question}
                 onAnswer={() => {
@@ -56,7 +57,9 @@ class App extends PureComponent {
           );
         case GameType.GENRE:
           return (
-            <GameScreen>
+            <GameScreen
+              type={question.type}
+            >
               <GenreQuestionScreenWrapped
                 question={question}
                 onAnswer={() => {
@@ -104,5 +107,6 @@ App.propTypes = {
   errorsCount: PropTypes.number.isRequired,
   questions: PropTypes.array.isRequired,
 };
+
 
 export default App;

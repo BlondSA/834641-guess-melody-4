@@ -1,6 +1,7 @@
 import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+
 import ArtistQuestionScreen from "./artist-question-screen.jsx";
 
 configure({adapter: new Adapter()});
@@ -10,7 +11,7 @@ const mock = {
     type: `artist`,
     song: {
       artist: ``,
-      src: ``,
+      src: ``
     },
     answers: [
       {
@@ -26,38 +27,36 @@ const mock = {
         picture: `pic-three`,
       },
     ],
-  },
+  }
 };
+
 
 const mockEvent = {
-  preventDefault() {},
+  preventDefault() {}
 };
 
-describe(`ArtistQuestionScreen e2e test`, () => {
-  it(`Click on user answer should pass to the callback data-object from which this answer was created`, () => {
-    const {question} = mock;
-    const onAnswer = jest.fn();
-    const userAnswer = {
-      artist: `one`,
-      picture: `pic-one`,
-    };
 
-    const screen = shallow(
-        <ArtistQuestionScreen
-          onAnswer={onAnswer}
-          question={question}
-          renderPlayer={() => {}}
-        />
-    );
+it(`Click on user answer should pass to the callback data-object from which this answer was created`, () => {
+  const {question} = mock;
+  const onAnswer = jest.fn();
+  const userAnswer = {
+    artist: `one`,
+    picture: `pic-one`,
+  };
 
-    const answerInputs = screen.find(`input`);
-    const answerOne = answerInputs.at(0);
+  const screen = shallow(<ArtistQuestionScreen
+    onAnswer={onAnswer}
+    question={question}
+    renderPlayer={() => {}}
+  />);
 
-    answerOne.simulate(`change`, mockEvent);
+  const answerInputs = screen.find(`input`);
+  const answerOne = answerInputs.at(0);
 
-    expect(onAnswer).toHaveBeenCalledTimes(1);
+  answerOne.simulate(`change`, mockEvent);
 
-    expect(onAnswer.mock.calls[0][0]).toMatchObject(question);
-    expect(onAnswer.mock.calls[0][1]).toMatchObject(userAnswer);
-  });
+  expect(onAnswer).toHaveBeenCalledTimes(1);
+
+  expect(onAnswer.mock.calls[0][0]).toMatchObject(question);
+  expect(onAnswer.mock.calls[0][1]).toMatchObject(userAnswer);
 });

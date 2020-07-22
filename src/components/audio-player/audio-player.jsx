@@ -7,6 +7,7 @@ export default class AudioPlayer extends PureComponent {
     super(props);
 
     this._audioRef = createRef();
+
     this.state = {
       progress: 0,
       isLoading: true,
@@ -17,6 +18,7 @@ export default class AudioPlayer extends PureComponent {
   componentDidMount() {
     const {src} = this.props;
     const audio = this._audioRef.current;
+
     audio.src = src;
 
     audio.oncanplaythrough = () => this.setState({
