@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import {App} from "./app.jsx";
 
 const mockStore = configureStore([]);
 
@@ -60,30 +60,6 @@ describe(`Render App`, () => {
             />
           </Provider>
       )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`Render GenreQuestionScreen`, () => {
-    const store = mockStore({
-      mistakes: 3,
-    });
-
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <App
-              maxMistakes={3}
-              questions={questions}
-              onUserAnswer={() => {}}
-              onWelcomeButtonClick={() => {}}
-              step={0}
-            />
-          </Provider>, {
-            createNodeMock: () => {
-              return {};
-            }
-          })
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
