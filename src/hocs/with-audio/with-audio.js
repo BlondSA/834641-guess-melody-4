@@ -21,10 +21,9 @@ const withAudio = (Component) => {
 
       audio.src = src;
 
-      audio.oncanplaythrough = () =>
-        this.setState({
-          isLoading: false,
-        });
+      audio.oncanplaythrough = () => this.setState({
+        isLoading: false,
+      });
 
       audio.onplay = () => {
         this.setState({
@@ -32,15 +31,23 @@ const withAudio = (Component) => {
         });
       };
 
-      audio.onpause = () =>
-        this.setState({
-          isPlaying: false,
-        });
+      audio.onpause = () => this.setState({
+        isPlaying: false,
+      });
 
-      audio.ontimeupdate = () =>
-        this.setState({
-          progress: audio.currentTime,
-        });
+      audio.ontimeupdate = () => this.setState({
+        progress: Math.floor(audio.currentTime),
+      });
+    }
+
+    componentDidUpdate() {
+      const audio = this._audioRef.current;
+
+      if (this.state.isPlaying) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
     }
 
     componentWillUnmount() {
@@ -53,29 +60,23 @@ const withAudio = (Component) => {
       audio.src = ``;
     }
 
-    componentDidUpdate() {
-      const audio = this._audioRef.current;
-
-      if (this.state.isPlaying) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    }
     render() {
       const {isLoading, isPlaying} = this.state;
       const {onPlayButtonClick} = this.props;
+
       return (
         <Component
           {...this.props}
-          isPlaying={isPlaying}
           isLoading={isLoading}
+          isPlaying={isPlaying}
           onPlayButtonClick={() => {
             this.setState({isPlaying: !isPlaying});
             onPlayButtonClick();
           }}
         >
-          <audio ref={this._audioRef} />
+          <audio
+            ref={this._audioRef}
+          />
         </Component>
       );
     }

@@ -6,13 +6,17 @@ import withAudio from "./with-audio.js";
 const MockComponent = (props) => {
   const {children} = props;
 
-  return <div>{children}</div>;
+  return (
+    <div>
+      {children}
+    </div>
+  );
 };
 
 MockComponent.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
+    PropTypes.node
   ]).isRequired,
 };
 
@@ -30,5 +34,6 @@ it(`withAudio is rendered correctly`, () => {
       return {};
     }
   }).toJSON();
+
   expect(tree).toMatchSnapshot();
 });
