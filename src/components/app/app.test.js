@@ -68,6 +68,7 @@ describe(`Render App`, () => {
               onUserAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               step={-1}
+              gameReset={() => {}}
             />
           </Provider>
       )
@@ -90,6 +91,7 @@ describe(`Render App`, () => {
               onUserAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               step={1}
+              gameReset={() => {}}
             />
           </Provider>,
           {
@@ -117,6 +119,7 @@ describe(`Render App`, () => {
               onUserAnswer={() => {}}
               onWelcomeButtonClick={() => {}}
               step={1}
+              gameReset={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
