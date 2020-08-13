@@ -1,7 +1,6 @@
 import React, {PureComponent, Fragment} from "react";
 import PropTypes from "prop-types";
 
-
 export default class AudioPlayer extends PureComponent {
   render() {
     const {isLoading, isPlaying, onPlayButtonClick, children} = this.props;
@@ -9,14 +8,14 @@ export default class AudioPlayer extends PureComponent {
     return (
       <Fragment>
         <button
-          className={`track__button track__button--${isPlaying ? `pause` : `play`}`}
+          className={`track__button track__button--${
+            isPlaying ? `pause` : `play`
+          }`}
           type="button"
           disabled={isLoading}
           onClick={() => onPlayButtonClick()}
         />
-        <div className="track__status">
-          {children}
-        </div>
+        <div className="track__status">{children}</div>
       </Fragment>
     );
   }
@@ -28,6 +27,6 @@ AudioPlayer.propTypes = {
   onPlayButtonClick: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
+    PropTypes.node,
   ]).isRequired,
 };
